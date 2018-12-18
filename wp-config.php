@@ -17,7 +17,6 @@
  *
  * @package WordPress
  */
-
 // Sendgrid settings - Read in the sendgrid auth from the config //
 define('SENDGRID_USERNAME', $_ENV["SENDGRID_USERNAME"]);
 define('SENDGRID_PASSWORD', $_ENV["SENDGRID_PASSWORD"]); 
@@ -25,29 +24,21 @@ define('SENDGRID_PASSWORD', $_ENV["SENDGRID_PASSWORD"]);
 // S3 Config Info - read the S3 Access Keys from the config //
 define( 'AWS_ACCESS_KEY_ID', $_ENV["AWS_ACCESS_KEY_ID"]);
 define( 'AWS_SECRET_ACCESS_KEY', $_ENV["AWS_SECRET_ACCESS_KEY"]);  
-
 // ** Heroku Postgres settings - from Heroku Environment ** //
 $db = parse_url($_ENV["DATABASE_URL"]);
-
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'test_hostelman'));
-
+define('DB_NAME', trim($db["path"],"/"));
 /** MySQL database username */
-define('DB_USER', 'test_hostelman');
-
+define('DB_USER', $db["user"]);
 /** MySQL database password */
-define('DB_PASSWORD', 'AdF$567o9piu');
-
+define('DB_PASSWORD', $db["pass"]);
 /** MySQL hostname */
-define('DB_HOST', 'db4free.net');
-
+define('DB_HOST', $db["host"]);
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
-
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
-
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -65,9 +56,7 @@ define('AUTH_SALT',        $_ENV["AUTH_SALT"]);
 define('SECURE_AUTH_SALT', $_ENV["SECURE_AUTH_SALT"]);
 define('LOGGED_IN_SALT',   $_ENV["LOGGED_IN_SALT"]);
 define('NONCE_SALT',       $_ENV["NONCE_SALT"]);
-
 /**#@-*/
-
 /**
  * WordPress Database Table prefix.
  *
@@ -75,7 +64,6 @@ define('NONCE_SALT',       $_ENV["NONCE_SALT"]);
  * prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix  = 'wp_';
-
 /**
  * WordPress Localized Language, defaults to English.
  *
@@ -85,7 +73,6 @@ $table_prefix  = 'wp_';
  * language support.
  */
 define('WPLANG', 'en');
-
 /**
  * For developers: WordPress debugging mode.
  *
@@ -95,12 +82,9 @@ define('WPLANG', 'en');
  */
 define('WP_DEBUG', false);
 define( 'WP_AUTO_UPDATE_CORE', false );
-
 /* That's all, stop editing! Happy blogging. */
-
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
-
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
